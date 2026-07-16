@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+    var s = 1;
+    var e = 100;
+    document.write("Multiples of 7 between " + s + " and " + e + ":<br>");
+    for (var i = s; i <= e; i++) {
+        if (i % 7 == 0) {
+            document.write(i + "<br>");
+        }
+    }
+</script>
+</body>
+</html>
