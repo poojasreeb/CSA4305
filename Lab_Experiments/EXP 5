@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+    var d = new Date();
+    var hour = d.getHours();
+    if (hour >= 6 && hour < 12) {
+        document.bgColor = "lightyellow";   
+    }
+    else if (hour >= 12 && hour < 17) {
+        document.bgColor = "lightblue";    
+    }
+    else if (hour >= 17 && hour < 20) {
+        document.bgColor = "orange";   
+    }
+    else {
+        document.bgColor = "black";  
+        document.body.style.color = "white";
+    }
+    document.write("Current Hour: " + hour);
+</script>
+</body>
+</html>
