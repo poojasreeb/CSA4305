@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        var n = 5;
+        var fact = 1;
+
+        for (var i = 1; i <= n; i++) {
+            fact = fact * i;
+        }
+        document.write("Factorial of " + n + " is " + fact);
+    </script>
+</body>
+</html>
