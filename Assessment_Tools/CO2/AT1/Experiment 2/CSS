@@ -1,0 +1,54 @@
+const email = document.getElementById("email");
+const phone = document.getElementById("phone");
+
+const emailError = document.getElementById("emailError");
+const phoneError = document.getElementById("phoneError");
+
+const form = document.getElementById("registerForm");
+
+// Email Validation
+function validateEmail() {
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(email.value.match(emailPattern)){
+        emailError.innerHTML = "";
+        return true;
+    }
+    else{
+        emailError.innerHTML = "Enter a valid email address";
+        return false;
+    }
+}
+
+// Phone Validation
+function validatePhone(){
+
+    const phonePattern = /^[0-9]{10}$/;
+
+    if(phone.value.match(phonePattern)){
+        phoneError.innerHTML = "";
+        return true;
+    }
+    else{
+        phoneError.innerHTML = "Phone number must contain exactly 10 digits";
+        return false;
+    }
+}
+
+// Real-time Validation
+email.addEventListener("keyup", validateEmail);
+phone.addEventListener("keyup", validatePhone);
+
+// Form Submission
+form.addEventListener("submit", function(event){
+
+    let emailValid = validateEmail();
+    let phoneValid = validatePhone();
+
+    if(!(emailValid && phoneValid)){
+        event.preventDefault();
+        alert("Please correct the errors before submitting.");
+    }
+
+});
