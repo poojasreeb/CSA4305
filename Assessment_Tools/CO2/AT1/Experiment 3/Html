@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Layout Debugging</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>My Responsive Webpage</h1>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Contact</a>
+</nav>
+
+<div class="container">
+
+    <main class="content">
+        <h2>Main Content</h2>
+        <p>
+            This section contains the main content of the webpage.
+            The layout remains responsive without overlapping.
+        </p>
+    </main>
+
+    <aside class="sidebar">
+        <h2>Sidebar</h2>
+        <p>Additional information appears here.</p>
+    </aside>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 CSS Layout Debugging</p>
+</footer>
+
+</body>
+</html>
