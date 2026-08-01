@@ -1,0 +1,38 @@
+/* Tablet */
+
+@media (max-width:768px){
+
+.container{
+    flex-direction:column;
+}
+
+nav{
+    flex-wrap:wrap;
+}
+
+}
+
+
+/* Mobile */
+
+@media (max-width:480px){
+
+header{
+    font-size:18px;
+}
+
+nav{
+    flex-direction:column;
+    align-items:center;
+}
+
+.container{
+    padding:10px;
+}
+
+.content,
+.sidebar{
+    padding:15px;
+}
+
+}
