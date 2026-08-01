@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Retail Website</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Retail Store</h1>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Products</a>
+    <a href="#">Offers</a>
+    <a href="#">Contact</a>
+</nav>
+
+<main class="container">
+
+    <section class="content">
+        <h2>Featured Products</h2>
+        <p>
+            Welcome to our online retail store. Browse the latest products,
+            discounts, and exclusive offers.
+        </p>
+    </section>
+
+    <aside class="sidebar">
+        <h3>Latest Deals</h3>
+        <ul>
+            <li>50% Discount</li>
+            <li>Buy 1 Get 1</li>
+            <li>Free Delivery</li>
+        </ul>
+    </aside>
+
+</main>
+
+<footer>
+    © 2026 Retail Store. All Rights Reserved.
+</footer>
+
+</body>
+</html>
