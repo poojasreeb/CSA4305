@@ -1,0 +1,90 @@
+ALGORITHM MVC_WebApplication
+
+BEGIN
+
+    // Step 1: User sends a request
+    userRequest ← RECEIVE_HTTP_REQUEST()
+
+    // Example:
+    // GET /users/101
+
+    // Step 2: Web server receives the request
+    webServer ← RECEIVE(userRequest)
+
+    // Step 3: Route the request
+    route ← IDENTIFY_ROUTE(userRequest)
+
+    IF route is invalid THEN
+        response ← CREATE_ERROR_RESPONSE(404, "Page Not Found")
+        SEND_HTTP_RESPONSE(response)
+        STOP
+    END IF
+
+    // Step 4: Controller receives the request
+    controller ← SELECT_CONTROLLER(route)
+    action ← SELECT_ACTION(route)
+
+    // Step 5: Controller processes the request
+    inputData ← EXTRACT_REQUEST_DATA(userRequest)
+
+    TRY
+
+        // Step 6: Controller calls the Model
+        modelData ← controller.action(inputData)
+
+        // Step 7: Model communicates with the database
+        databaseConnection ← CONNECT_TO_DATABASE()
+
+        query ← CREATE_DATABASE_QUERY(inputData)
+
+        databaseResult ← EXECUTE_QUERY(
+                            databaseConnection,
+                            query
+                         )
+
+        // Step 8: Model processes database results
+        modelData ← PROCESS_DATABASE_RESULT(databaseResult)
+
+        CLOSE_DATABASE_CONNECTION(databaseConnection)
+
+        // Step 9: Controller receives data from Model
+        viewData ← PREPARE_VIEW_DATA(modelData)
+
+        // Step 10: Controller selects the appropriate View
+        view ← SELECT_VIEW(route)
+
+        // Step 11: View generates the response
+        renderedPage ← RENDER_VIEW(
+                            view,
+                            viewData
+                        )
+
+        // Step 12: Create HTTP response
+        response ← CREATE_HTTP_RESPONSE(
+                        status = 200,
+                        content = renderedPage
+                   )
+
+    CATCH DatabaseError
+
+        response ← CREATE_ERROR_RESPONSE(
+                        500,
+                        "Database error"
+                   )
+
+    CATCH ApplicationError
+
+        response ← CREATE_ERROR_RESPONSE(
+                        500,
+                        "Internal server error"
+                   )
+
+    END TRY
+
+    // Step 13: Send response to the user
+    SEND_HTTP_RESPONSE(response)
+
+    // Step 14: Browser displays the response
+    DISPLAY_IN_BROWSER(response)
+
+END
