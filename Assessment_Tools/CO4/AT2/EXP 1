@@ -1,0 +1,100 @@
+ALGORITHM ParseXMLDocument
+
+BEGIN
+
+    // Step 1: Load the XML document
+    DISPLAY "Enter XML file path:"
+    READ filePath
+
+    TRY
+        xmlDocument ← LOAD_XML_FILE(filePath)
+    CATCH FileNotFoundError
+        DISPLAY "Error: XML file not found."
+        STOP
+    CATCH XMLParsingError
+        DISPLAY "Error: Invalid XML format."
+        STOP
+    END TRY
+
+
+    // Step 2: Access the root element
+    root ← GET_ROOT_ELEMENT(xmlDocument)
+
+    IF root = NULL THEN
+        DISPLAY "Error: XML document has no root element."
+        STOP
+    END IF
+
+    DISPLAY "Root Element: " + root.name
+
+
+    // Step 3: Traverse the XML hierarchy
+    PROCEDURE TraverseNode(node, level)
+
+        indentation ← REPEAT("    ", level)
+
+        // Display the current element
+        DISPLAY indentation + "Element: " + node.name
+
+        // Step 4: Extract attributes, if any
+        IF node has attributes THEN
+            FOR EACH attribute IN node.attributes DO
+                DISPLAY indentation + "  " +
+                        attribute.name + ": " +
+                        attribute.value
+            END FOR
+        END IF
+
+        // Step 5: Extract text content
+        text ← TRIM(node.text)
+
+        IF text is not empty THEN
+            DISPLAY indentation + "  Value: " + text
+        END IF
+
+        // Step 6: Traverse child elements
+        FOR EACH child IN node.children DO
+
+            IF child is an ELEMENT node THEN
+                CALL TraverseNode(child, level + 1)
+            END IF
+
+        END FOR
+
+    END PROCEDURE
+
+
+    // Step 7: Start traversal from the root
+    CALL TraverseNode(root, 0)
+
+
+    // Step 8: Extract specific required data
+    // Example: Extract information from every <user> element
+
+    users ← FIND_ALL_ELEMENTS(xmlDocument, "user")
+
+    IF users is not empty THEN
+
+        DISPLAY ""
+        DISPLAY "========== USER DETAILS =========="
+
+        FOR EACH user IN users DO
+
+            name ← GET_CHILD_TEXT(user, "name")
+            email ← GET_CHILD_TEXT(user, "email")
+            age ← GET_CHILD_TEXT(user, "age")
+
+            DISPLAY "Name  : " + name
+            DISPLAY "Email : " + email
+            DISPLAY "Age   : " + age
+            DISPLAY "--------------------------------"
+
+        END FOR
+
+    END IF
+
+
+    // Step 9: Display completion message
+    DISPLAY "XML parsing completed successfully."
+
+END
