@@ -1,0 +1,64 @@
+ALGORITHM ValidateUserForm
+
+BEGIN
+
+    // Step 1: Receive form data
+    name ← GET_FORM_VALUE("name")
+    email ← GET_FORM_VALUE("email")
+    password ← GET_FORM_VALUE("password")
+
+    errors ← EMPTY_LIST
+
+
+    // Step 2: Check for empty fields
+    IF name is empty THEN
+        ADD "Name is required." TO errors
+    END IF
+
+    IF email is empty THEN
+        ADD "Email is required." TO errors
+    END IF
+
+    IF password is empty THEN
+        ADD "Password is required." TO errors
+    END IF
+
+
+    // Step 3: Validate email format
+    IF email is not empty THEN
+        IF email does not match valid email format THEN
+            ADD "Enter a valid email address." TO errors
+        END IF
+    END IF
+
+
+    // Step 4: Validate password
+    IF password is not empty THEN
+        IF LENGTH(password) < 8 THEN
+            ADD "Password must contain at least 8 characters." TO errors
+        END IF
+    END IF
+
+
+    // Step 5: Check validation results
+    IF errors is not empty THEN
+
+        // Display all error messages
+        FOR EACH error IN errors DO
+            DISPLAY error
+        END FOR
+
+        DISPLAY "Form submission failed."
+
+    ELSE
+
+        // Step 6: Accept valid input
+        DISPLAY "All inputs are valid."
+        DISPLAY "Form submitted successfully."
+
+        // Process or store the validated data
+        PROCESS_FORM_DATA(name, email, password)
+
+    END IF
+
+END
